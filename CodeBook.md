@@ -1,0 +1,5 @@
+#CodeBook
+
+Variables
+Data
+Transformations
