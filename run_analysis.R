@@ -1,6 +1,4 @@
-#Getting and Cleaning Data Course Project
-#Harrison Kirby
-#May 2017
+#####1. Merges the training and the test sets to create one data set.#####
 
 #download and extract data
 if(!file.exists("data.zip")){
@@ -8,7 +6,6 @@ if(!file.exists("data.zip")){
   download.file(fileurl, destfile ="data.zip", method = "auto")
 }
 if(!dir.exists("UCI HAR Dataset")) unzip("data.zip")
-
 
 #read test data
 test <- read.table("UCI HAR Dataset/test/X_test.txt")
@@ -33,6 +30,8 @@ data <- rbind(test_data, train_data)
 rm(test_data, train_data)
 
 
+#####2. Extracts only the measurements on the mean and standard deviation for each measurement.#####
+
 #apply variable names
 features <- read.table("UCI HAR Dataset/features.txt")
 variablenames <- as.vector(features$V2)
@@ -45,6 +44,8 @@ rm(features)
 sub <- grepl("mean()", variablenames, fixed = TRUE) | grepl("std()", variablenames, fixed = TRUE)
 data <- data[c(TRUE, TRUE, sub)]
 rm(sub, variablenames)
+
+#####3. Uses descriptive activity names to name the activities in the data set#####
 
 #Label the values of the activity variable
 activities <- read.table("UCI HAR Dataset/activity_labels.txt")
@@ -59,10 +60,15 @@ for(i in 1:nrow(data)){
 data$activity <- as.character(act)
 rm(activities, act, i)
 
-#Properly Format variable names
+#####4. Appropriately labels the data set with descriptive variable names.#####
+
+#Properly format variable names
 colnames(data) <- tolower(
                       gsub("[[:punct:]]", "", colnames(data))
                   )
+
+#####5. From the data set in step 4, creates a second, independent tidy data set #####
+#####   with the average of each variable for each activity and each subject.    #####
 
 #Create a second tidy data set with the average of each variable for each activity and each subject
 library(dplyr)
