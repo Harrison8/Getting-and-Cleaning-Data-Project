@@ -78,3 +78,5 @@ averages <- data.frame()
 averages <- data %>%
     group_by(activity, subject) %>%
     summarise_all(mean)
+
+write.table(averages, file = "output.txt", row.names = FALSE)
