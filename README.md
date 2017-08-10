@@ -5,6 +5,7 @@ This repo contains several files:
 1. run_analysis.R is the script which performs the function of this project.
 2. data.zip contains the data necessary for this project (though this can also be downloaded by the R script).
 3. output.txt is the result of running this program.
+4. CodeBook.md describes the data, transformations, and final variables in this project.
 
 ---
 ### run_analysis.R functionality
